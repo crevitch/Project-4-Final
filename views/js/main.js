@@ -418,9 +418,9 @@ var resizePizzas = function(size) {
         console.log("bug in changeSliderLabel");
     }
   }
-
-  changeSliderLabel(size);
 window.performance.mark("mark_start_resize");
+  changeSliderLabel(size);
+
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
@@ -461,17 +461,17 @@ window.performance.mark("mark_start_resize");
 	  //console.log("newlog" + newwidth);
     }
   }
-  
+  window.performance.mark("mark_start_generating"); // collect timing data
   changePizzaSizes(size);
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resoze1 pizzas: " + timeToResize[0].duration + "ms");
+  console.log("Time to resoze2 pizzas: " + timeToResize[0].duration + "ms");
 };
 
-window.performance.mark("mark_start_generating"); // collect timing data
+
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {

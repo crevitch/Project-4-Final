@@ -420,7 +420,7 @@ var resizePizzas = function(size) {
   }
 
   changeSliderLabel(size);
-
+window.performance.mark("mark_start_resize");
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
     var oldwidth = elem.offsetWidth;
@@ -461,14 +461,14 @@ var resizePizzas = function(size) {
 	  //console.log("newlog" + newwidth);
     }
   }
-  window.performance.mark("mark_start_resize");
+  
   changePizzaSizes(size);
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
-  console.log("Time to resoze pizzas: " + timeToResize[0].duration + "ms");
+  console.log("Time to resoze1 pizzas: " + timeToResize[0].duration + "ms");
 };
 
 window.performance.mark("mark_start_generating"); // collect timing data

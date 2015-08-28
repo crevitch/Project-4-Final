@@ -400,7 +400,7 @@ var pizzaElementGenerator = function(i) {
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
-  window.performance.mark("mark_start_resize");   // User Timing API function
+  //window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
@@ -461,7 +461,7 @@ var resizePizzas = function(size) {
 	  //console.log("newlog" + newwidth);
     }
   }
-
+  window.performance.mark("mark_start_resize");
   changePizzaSizes(size);
 
   // User Timing API is awesome

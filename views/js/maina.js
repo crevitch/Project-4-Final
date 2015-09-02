@@ -532,12 +532,42 @@ function updatePositions() {
     logAverageFrame(timesToUpdatePosition);
   }
 }
+function dontUpdate(){
+	
+  /*frame++;
+  window.performance.mark("mark_start_frame");
 
+  //var items = document.querySelectorAll('.mover'); more efficient to use other
+  var items = document.getElementsByClassName('mover');
+  
+  //console.log("items.length" + items.length);
+  
+  // taking out repetitive stuff from loop
+  var phase=[];
+  for (var i=0;i<5;i++)
+	  phase[i] = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+  
+  for (var i = 0; i < items.length; i++) {
+    
+    items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
+  }
+
+  // User Timing API to the rescue again. Seriously, it's worth learning.
+  // Super easy to create custom metrics.
+  window.performance.mark("mark_end_frame");
+  window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
+  if (frame % 10 === 0) {
+    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
+    logAverageFrame(timesToUpdatePosition);
+  }*/
+}
+function dontUpda(){}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
-
+//window.addEventListener('scroll', dontUpda);
 // Generates the sliding pizzas when the page loads.
-//document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("page load");
   var cols = 8;
   var s = 256;
   for (var i = 0; i < 32; i++) {	//changed from 200
@@ -551,5 +581,6 @@ window.addEventListener('scroll', updatePositions);
     document.querySelector("#movingPizzas1").appendChild(elem);
 	//document.getElementsByClassName("#movingPizzas1").appendChild(elem);
   }
-  document.addEventListener('DOMContentLoaded', function() {updatePositions();
+  //document.addEventListener('DOMContentLoaded', function() {updatePositions();
+  updatePositions();
 });

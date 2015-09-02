@@ -510,6 +510,7 @@ function updatePositions() {
 
   //var items = document.querySelectorAll('.mover'); more efficient to use other
   var items = document.getElementsByClassName('mover');
+  //var items=[];
   //console.log("items.length" + items.length);
   
   // taking out repetitive stuff from loop
@@ -561,7 +562,36 @@ function dontUpdate(){
     logAverageFrame(timesToUpdatePosition);
   }*/
 }
-function dontUpda(){}
+
+
+/*;(function() {
+    var throttle = function(type, name, obj) {
+        var obj = obj || window;
+        var running = false;
+        var func = function() {
+            if (running) { return; }
+            running = true;
+            requestAnimationFrame(function() {
+                obj.dispatchEvent(new CustomEvent(name));
+                running = false;
+            });
+        };
+        obj.addEventListener(type, func);
+    };
+
+   
+    throttle ("scroll", "optimizedScroll");
+})();*/
+
+// handle event
+//window.addEventListener("optimizedScroll", updatePositions);
+
+
+
+
+
+
+//function dontUpda(){}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 //window.addEventListener('scroll', dontUpda);
@@ -570,7 +600,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log("page load");
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 64; i++) {	//changed from 200
+  for (var i = 0; i < 10; i++) {	//changed from 200
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";

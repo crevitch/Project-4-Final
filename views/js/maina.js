@@ -563,7 +563,8 @@ function dontUpdate(){
 }
 function dontUpda(){}
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+//window.addEventListener('scroll', updatePositions);
+window.requestAnimationFrame(updatePositions);
 //window.addEventListener('scroll', dontUpda);
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {

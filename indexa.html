@@ -4,12 +4,16 @@ Cache-Control:private, max-age=3600;>
 <html lang="en" >
 <head>
 <style>
+
+<!-- crevitch: Begin Internal version of style.css code for speed -->
 html {font-size: 100%;
   overflow-y: scroll;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: none;}
-button, input, select, textarea { font-family: 'Open Sans', sans-serif; color: #333; }
+
+  button, input, select, textarea { font-family: 'Open Sans', sans-serif; color: #333; }
+
 a { color: #12C; }
 a:visited { color: #61C; }
 a:focus { outline: thin dotted; }
@@ -49,6 +53,8 @@ footer span { float: right; font-style: italic; }
   body { font-size: 12px;}
   header p { padding-left: 4.5em;}
 }
+<!-- crevitch: the following external style (googleapis) moved to internal below -->
+<!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
 
 /* latin */
 @font-face {
@@ -67,6 +73,8 @@ footer span { float: right; font-style: italic; }
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
 </style>
+<!-- crevitch: End Internal version of style.css code for speed -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content=" FILL ME IN ">
@@ -74,10 +82,14 @@ footer span { float: right; font-style: italic; }
     <title>Cameron Pittman: Portfolio</title>
 
     <!-- Hmm, what is the impact of web fonts on speed? Measure it... -->
-  <!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
+	<!-- crevitch: the following external style was moved to internal in section above> -->
+	<!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> -->
 
-    <!-- <link href="css/stylea.css" rel="stylesheet"> -->
-    <link href="css/print.css" rel="stylesheet" media="print"> <!--crevitch changed media print -->
+    <!-- crevitch: the following external style was moved to internal in section above> -->
+	<!-- <link href="css/stylea.css" rel="stylesheet"> -->
+    
+	<!--crevitch: changed to media print for speed-->
+	<link href="css/print.css" rel="stylesheet" media="print"> 
 
     <script>
       (function(w,g){w['GoogleAnalyticsObject']=g;
@@ -87,10 +99,13 @@ footer span { float: right; font-style: italic; }
       ga('create', 'UA-XXXX-Y');
       ga('send', 'pageview');
     </script>
-    <script async src="http://www.google-analytics.com/analytics.js"></script> <!--crevitch changed to async -->
+    
+	<!--crevitch: changed to async -->
+	<script async src="http://www.google-analytics.com/analytics.js"></script> 
     <script async src="js/perfmatters.js"></script>
   </head>
 
+    <!-- crevitch: Inline of code from style.css for speed... -->
   <body style="margin: 0; font-size: 14px; line-height: 1.61; font-weight: 400;font-family: 'Open Sans', sans-serif; color: #333;">
     
 	
@@ -125,7 +140,8 @@ footer span { float: right; font-style: italic; }
           </li>
 
           <li>
-            <img style="width: 100px;" src="build/image/pizzeria2s.jpg">
+            <!-- crevitch: changed picture and html reference so that originals can stay in place -->
+			<img style="width: 100px;" src="build/image/pizzeria2s.jpg">
             <a href="views/pizzaa.html">Cam's Pizzeria</a>
             <p>Who wants a performant pizza?</p>
           </li>

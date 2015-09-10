@@ -458,7 +458,7 @@ window.performance.mark("mark_start_resize");
 	  for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
       //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+      // temp remove for test document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
 	  //console.log("newlog" + newwidth);
     }
   }

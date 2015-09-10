@@ -523,7 +523,7 @@ function updatePositions() {
 	//var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     //items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
 	//items[i].style.left = items[i].basicLeft + 'px';
-	//items[i].style.transform = 'translate3d(' + (100 * phase[i%5]) + 'px,0,0)';
+	items[i].style.transform = 'translate3d(' + (100 * phase[i%5]) + 'px,0,0)';
 	//items[i].style.transform = 'translate3d(0,0,0)';
   }
 

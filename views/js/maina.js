@@ -450,21 +450,23 @@ window.performance.mark("mark_start_resize");
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-	  //moved next two out of loop
-	  // values were the same for all elements so took these calculations out of the loop
+	 
+	  // crevitch: values of dx and newwidth were the same for all elements so took these calculations out of the loop
 	  var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[0], size);
       var newwidth = (document.querySelectorAll(".randomPizzaContainer")[0].offsetWidth + dx) + 'px';
 
+	  // crevitch: do the dom lookup once and use ranpiz as object to set width and find length in for loop
 	  var ranpiz = document.querySelectorAll(".randomPizzaContainer"); // test
-	 //var totpiz = document.querySelectorAll(".randomPizzaContainer").length;
-	 console.log("count of pizza container" + ranpiz.length);
+	 
       for (var i = 0; i < ranpiz.length; i++) {
-	//var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      // test out document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
-	       ranpiz[i].style.width = newwidth; // test new
-	  //console.log("newlog" + newwidth);
-    }
+	   //crevitch: following 2 lines moved out of loop because values don't change
+	   //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
+       //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
+      
+	   // DOM lookup done once above (ranpiz=) to save time.  removed following line and replace with next line
+	   // document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+	   ranpiz[i].style.width = newwidth; 
+	  }
   }
   
   changePizzaSizes(size);
@@ -512,52 +514,29 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  //var items = document.querySelectorAll('.mover'); more efficient to use other
-  var items = document.getElementsByClassName('mover');
-  //var items=[];
-  //console.log("items.length" + items.length);
-  
-  // taking out repetitive stuff from loop
-  var phase=[];
-  for (var i=0;i<5;i++)
-	  phase[i] = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-  
-  for (var i = 0; i < items.length; i++) {
-    //console.log("scrolltop"+document.body.scrollTop);
-	//var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    //items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
-	//items[i].style.left = items[i].basicLeft + 'px';
-	items[i].style.transform = 'translate3d(' + (100 * phase[i%5]) + 'px,0,0)';
-	//items[i].style.transform = 'translate3d(0,0,0)';
-  }
-
-  // User Timing API to the rescue again. Seriously, it's worth learning.
-  // Super easy to create custom metrics.
-  window.performance.mark("mark_end_frame");
-  window.performance.measure("measure_frame_duration", "mark_start_frame", "mark_end_frame");
-  if (frame % 10 === 0) {
-    var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
-    logAverageFrame(timesToUpdatePosition);
-  }
-}
-function dontUpdate(){
-	
-  /*frame++;
-  window.performance.mark("mark_start_frame");
-
-  //var items = document.querySelectorAll('.mover'); more efficient to use other
+  // crevitch: more efficient to use getElementsByClassName
+  //var items = document.querySelectorAll('.mover'); 
   var items = document.getElementsByClassName('mover');
   
-  //console.log("items.length" + items.length);
   
-  // taking out repetitive stuff from loop
+  // crevitch:  there are only 5 different phases for each scroll position.  no need to recalculate for each item
+  // define phase array for the 5 phases and pre-calculate to save time
   var phase=[];
-  for (var i=0;i<5;i++)
+  for (var i=0;i<5;i++){
 	  phase[i] = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+  }
   
   for (var i = 0; i < items.length; i++) {
     
-    items[i].style.left = items[i].basicLeft + 100 * phase[i%5] + 'px';
+	// crevitch: use pre-calculated phase array. Use translate function as more efficient. 
+	// note style.left requires absolute position.  transform moved from current location
+	// hence we no longer need to includ basicLeft
+	// Use 3d to put in separate layer to make painting more efficient.
+	// Following two lines replaced with 3rd line
+	// var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+	// items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    items[i].style.transform = 'translate3d(' + (100 * phase[i%5]) + 'px,0,0)';
+	
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -567,60 +546,34 @@ function dontUpdate(){
   if (frame % 10 === 0) {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
-  }*/
+  }
 }
 
-
-/*;(function() {
-    var throttle = function(type, name, obj) {
-        var obj = obj || window;
-        var running = false;
-        var func = function() {
-            if (running) { return; }
-            running = true;
-            requestAnimationFrame(function() {
-                obj.dispatchEvent(new CustomEvent(name));
-                running = false;
-            });
-        };
-        obj.addEventListener(type, func);
-    };
-
-   
-    throttle ("scroll", "optimizedScroll");
-})();*/
-
-// handle event
-//window.addEventListener("optimizedScroll", updatePositions);
-
-
-
-
-
-
-//function dontUpda(){}
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
-//window.addEventListener('scroll', dontUpda);
+
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   console.log("page load");
   var cols = 8;
   var s = 256;
+  
+  // crevitch: don't need to generate 200.  <32 visible on page
   for (var i = 0; i < 32; i++) {	//changed from 200
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
-    //elem.basicLeft = (i % cols) * s;
-	
+    
+	//crevitch: we no longer need basicLeft, but we do need to set initial style.left position
+	//elem.basicLeft = (i % cols) * s;
 	elem.style.left = (i % cols) * s + 'px';
     
 	elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
-	//document.getElementsByClassName("#movingPizzas1").appendChild(elem);
+	
   }
-  //document.addEventListener('DOMContentLoaded', function() {updatePositions();
+  
   updatePositions();
 });

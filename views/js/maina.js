@@ -454,11 +454,13 @@ window.performance.mark("mark_start_resize");
 	  // values were the same for all elements so took these calculations out of the loop
 	  var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[0], size);
       var newwidth = (document.querySelectorAll(".randomPizzaContainer")[0].offsetWidth + dx) + 'px';
-	  
+
+	  var ranpiz = document.querySelectorAll(".randomPizzaContainer"); // test
 	  for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
       //var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
       //var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
-      // temp remove for test document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+      // test out document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+	       ranpiz[i].style.width = newwidth; // test new
 	  //console.log("newlog" + newwidth);
     }
   }
